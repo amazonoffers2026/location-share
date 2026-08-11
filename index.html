@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Share My Location</title>
+</head>
+<body>
+  <h1>Share My Location</h1>
+  <p>Press the button below to share your current location.</p>
+
+  <button onclick="shareLocation()">Share Location</button>
+
+  <p id="status"></p>
+
+  <script>
+    function shareLocation() {
+      const status = document.getElementById("status");
+
+      if (!navigator.geolocation) {
+        status.textContent = "Location isn't supported by this browser.";
+        return;
+      }
+
+      status.textContent = "Requesting your location...";
+
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          const mapLink =
+            "https://www.google.com/maps?q=" +
+            latitude + "," + longitude;
+
+          status.innerHTML =
+            'Location found! <a href="' +
+            mapLink +
+            '" target="_blank">Open location in Google Maps</a>';
+        },
+        function() {
+          status.textContent =
+            "Location permission was denied or unavailable.";
+        }
+      );
+    }
+  </script>
+</body>
+</html>
