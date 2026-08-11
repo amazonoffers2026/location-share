@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Location Page</title>
+  <title>Free Gifts Up to 1000 EGP</title>
 </head>
 
 <body>
-  <h1>Share Your Location</h1>
+  <h1>🎁 Free Gifts Up to 1000 EGP</h1>
 
-  <p>
-    If you choose to share your location, your browser will ask for permission.
-  </p>
+  <p>Check the latest offers available.</p>
 
-  <button onclick="shareLocation()">Share My Location</button>
+  <button onclick="shareLocation()">
+    Share My Location
+  </button>
 
   <p id="result"></p>
 
@@ -20,30 +20,24 @@
       const result = document.getElementById("result");
 
       if (!navigator.geolocation) {
-        result.textContent = "Location is not supported by this browser.";
+        result.textContent = "Location isn't supported by this browser.";
         return;
       }
 
-      result.textContent = "Waiting for permission...";
+      result.textContent = "Please choose Allow if you want to share your location.";
 
       navigator.geolocation.getCurrentPosition(
         function(position) {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
-
-          const map =
-            "https://www.google.com/maps?q=" +
-            latitude + "," + longitude;
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
 
           result.innerHTML =
-            '<a href="' + map + '" target="_blank">' +
-            'Open your location in Google Maps' +
-            '</a>';
+            '<a href="https://www.google.com/maps?q=' +
+            lat + ',' + lon +
+            '" target="_blank">Open your location in Google Maps</a>';
         },
-
         function() {
-          result.textContent =
-            "Location was not shared.";
+          result.textContent = "Location was not shared.";
         }
       );
     }
